@@ -11,6 +11,8 @@ import (
 func main() {
   version := "v0.1.0-rc1"
   app := &cli.App{
+    Name: "latexd",
+    Usage: "dockerized tooling for latex",
     Flags: []cli.Flag{
       &cli.StringFlag{
         Name:    "image",
