@@ -1,16 +1,12 @@
 PWD=$(shell pwd)
 
-clean:
-	find . -type f -name '*.log' -delete
-	find . -type f -name '*.pdf' -delete
-
 .PHONY: cli
 cli: 
 	cd cli && go build -o ../latexd
 
-docker/build:
-	docker build . -t paguos/latex-docker
+build:
+	docker build . -t latexd
 
-shell: docker/build
-	docker run -ti -v $(PWD):/docs paguos/latex-docker /bin/zsh
+shell: build
+	docker run -ti -v $(PWD):/docs latexd /bin/zsh
 
