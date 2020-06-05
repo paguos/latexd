@@ -1,6 +1,7 @@
 package main
 
 import (
+  "fmt"
   "os"
   
   log "github.com/sirupsen/logrus"
@@ -8,11 +9,12 @@ import (
 )
 
 func main() {
+  version := "v0.1.0-rc1"
   app := &cli.App{
     Flags: []cli.Flag{
       &cli.StringFlag{
         Name:    "image",
-        Value: "paguos/latexd:v0.1.0-rc1",
+        Value: "paguos/latexd:" + version,
         Aliases: []string{"i"},
         Usage:   "Docker IMAGE to be used",
       },
@@ -39,6 +41,15 @@ func main() {
         Usage:       "Open a shell inside the latexd container (not implemented)",
         Action:  func(c *cli.Context) error {
           log.Warning("Command not implemented!")
+          return nil
+        },
+      },
+      {
+        Name:        "version",
+        Aliases:     []string{"v"},
+        Usage:       "Print version information",
+        Action:  func(c *cli.Context) error {
+          fmt.Println("Version: ", version)
           return nil
         },
       },
